@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Hero } from '../models/Hero';
 import { HeroService } from '../services/hero.service';
-import { MessageService } from '../services/message.service';
+
 @Component({
-  selector: 'app-heroes',
-  templateUrl: './heroes.component.html',
-  styleUrls: ['./heroes.component.css']
+  selector: 'app-dashboard',
+  templateUrl: './dashboard.component.html',
+  styleUrls: ['./dashboard.component.css']
 })
-export class HeroesComponent implements OnInit {
+export class DashboardComponent implements OnInit {
 
   constructor(private heroService: HeroService) { }
 
@@ -19,7 +19,7 @@ export class HeroesComponent implements OnInit {
 
   getHeroes(): void {
     this.heroService.getHeroes()
-      .subscribe(response => this.heroes = response);
+      .subscribe(response => this.heroes = response.slice(1, 5));
   }
 
 }
