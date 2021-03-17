@@ -24,7 +24,7 @@ export class HeroDetailComponent implements OnInit {
     this.getHero();
   }
 
-  // ? Note: the '!' operator is a not null assetion operator
+  // ? Note: the ! operator is a not null assetion operator
   // ? Note: + converts a string to a number
   getHero(): void {
     const id: number = +this.route.snapshot.paramMap.get('id')!;
