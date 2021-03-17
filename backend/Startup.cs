@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using backend.Data;
+using backend.services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -10,6 +12,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
 
 namespace backend
@@ -28,6 +31,12 @@ namespace backend
         {
 
             services.AddControllers();
+            
+            services.Configure<ComicsDatabaseSettings>(Configuration.GetSection(nameof(ComicsDatabaseSettings)));
+            services.AddSingleton<IComicsDatabaseSettings>(sp 
+                => sp.GetRequiredService<IOptions<ComicsDatabaseSettings>>().Value);
+            services.AddSingleton<HeroServices>();
+            
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "backend", Version = "v1" });
