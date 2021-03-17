@@ -1,10 +1,10 @@
 using backend.Data;
-using backend.models;
+using backend.Models;
 using MongoDB.Driver;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace backend.services
+namespace backend.Services
 {
     public class HeroServices
     {
@@ -19,9 +19,11 @@ namespace backend.services
         }
 
         // Get all heroes from the database collection
-        public List<Heroes> GetAll() => _heroes.Find(heros => true).ToList();
+        public List<Heroes> GetAll() => 
+            _heroes.Find(heros => true).ToList();
         // Get one specific hero from the database collection
-        public Heroes GetOne(string id) => _heroes.Find<Heroes>(hero => hero.Id == id).FirstOrDefault();
+        public Heroes GetOne(string id) => 
+            _heroes.Find<Heroes>(hero => hero.Id == id).FirstOrDefault();
         // Creates a hero in the database collection
         public Heroes Create(Heroes hero)
         {
@@ -29,10 +31,13 @@ namespace backend.services
             return hero;
         }
         // Update's an existing hero in the database collection
-        public void Update(string id, Heroes heroUpdate) => _heroes.ReplaceOne(hero => hero.Id == id, heroUpdate);
+        public void Update(string id, Heroes heroUpdate) => 
+            _heroes.ReplaceOne(hero => hero.Id == id, heroUpdate);
         // Remove's a hero from the database collection using the entire object
-        public void Remove(Heroes heroRemove) => _heroes.DeleteOne(hero => hero.Id == heroRemove.Id);
+        public void Remove(Heroes heroRemove) => 
+            _heroes.DeleteOne(hero => hero.Id == heroRemove.Id);
         // Remove's a hero from the database collection using the id 
-        public void Remove(string id) => _heroes.DeleteOne(hero => hero.Id == id);
+        public void Remove(string id) =>
+             _heroes.DeleteOne(hero => hero.Id == id);
     }
 }
