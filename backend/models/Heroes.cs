@@ -10,6 +10,7 @@ namespace backend.Models
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
         public string Id { get; set; }
+        
         [BsonElement("Name")]
         [JsonProperty("Name")]
         public string Name { get; set; } 
