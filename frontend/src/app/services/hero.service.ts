@@ -31,15 +31,15 @@ export class HeroService {
       );
   }
 
-  private messageLog(message: string) {
+  private messageLog(message: string): void {
     this.messageService.add(`HeroService: ${message}`);
   }
 
-  private handleError<T>(operation: string = 'operation', result?: T) {
+  private handleError<T>(operation: string = 'operation', result?: T): any {
     return (error: any): Observable<T> => {
-      
+
       // TODO: send the error to remote logging infrastructure
-      console.error(error); 
+      console.error(error);
 
       // TODO: better job of transforming error for user consumption
       this.messageLog(`${operation} failed: ${error.message}`);
