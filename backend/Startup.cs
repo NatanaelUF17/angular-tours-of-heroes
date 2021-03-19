@@ -26,6 +26,8 @@ namespace backend
 
         public IConfiguration Configuration { get; }
 
+        readonly string MyAllowCorsPolicy = "_MyAllowCorsPolicy";
+
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
@@ -39,6 +41,15 @@ namespace backend
             services.AddControllers()
                 .AddNewtonsoftJson(options => options.UseMemberCasing());
 
+            services.AddCors(options => 
+            {   
+                options.AddPolicy(name: MyAllowCorsPolicy, builder => {
+                    builder.WithOrigins("http://localhost:4200")
+                        .AllowAnyHeader()
+                        .AllowAnyMethod();
+                });
+            });
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "backend", Version = "v1" });
@@ -48,6 +59,8 @@ namespace backend
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseCors(MyAllowCorsPolicy);
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

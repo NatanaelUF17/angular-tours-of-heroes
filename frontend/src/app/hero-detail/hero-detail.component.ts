@@ -27,9 +27,16 @@ export class HeroDetailComponent implements OnInit {
   // ? Note: the ! operator is a not null assetion operator
   // ? Note: + converts a string to a number
   getHero(): void {
+    /* 
+    NOTE: this was the old way using the id as a number type parameter
     const id: number = +this.route.snapshot.paramMap.get('id')!;
+    */
+    const id: string = this.route.snapshot.paramMap.get('id')!;
     this.heroService.getHero(id)
-      .subscribe(response => this.hero = response);
+      .subscribe((response: any) => {
+        console.log(response);
+        this.hero = response;
+      });
   }
 
   goBack(): void {

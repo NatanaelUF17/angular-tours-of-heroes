@@ -9,10 +9,11 @@ namespace backend.Models
     {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
+        [JsonProperty("id")]
         public string Id { get; set; }
         
         [BsonElement("Name")]
-        [JsonProperty("Name")]
+        [JsonProperty("name")]
         public string Name { get; set; } 
     }
 }
